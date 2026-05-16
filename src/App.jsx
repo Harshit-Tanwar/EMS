@@ -23,19 +23,20 @@ const App = () => {
 
 
   const handleLogin = (email, password) => {
-    if (email == 'admin@example.com' && password == '123') {
+    if (email === 'admin@example.com' && password === '123') {
       setUser('admin')
       localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }))
     } else if (userData) {
-      const employee = userData.find((e) => email == e.email && e.password == password)
+      const employee = userData.find((e) => email === e.email && e.password === password)
       if (employee) {
         setUser('employee')
         setLoggedInUserData(employee)
-        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee',data:employee }))
+        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee', data: employee }))
+      } else {
+        alert("Invalid credentials. Please try again.")
       }
-    } 
-    else {
-      alert("Invalid Credentials")
+    } else {
+      alert("Invalid credentials. Please try again.")
     }
   }
 

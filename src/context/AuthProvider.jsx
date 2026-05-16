@@ -9,10 +9,8 @@ const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState(null)
 
     useEffect(() => {
-        if (!localStorage.getItem('employees') || !localStorage.getItem('admin')) {
-            setLocalStorage()
-        }
-
+        // Reset to seed new employee data shape (attendance, leaves, profile)
+        setLocalStorage()
         const { employees } = getLocalStorage()
         setUserData(employees)
     }, [])
