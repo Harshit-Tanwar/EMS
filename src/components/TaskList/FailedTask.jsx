@@ -1,21 +1,18 @@
-import React from 'react'
+import { XCircle } from 'lucide-react'
 
-const FailedTask = ({data}) => {
-  return (
-    <div className='flex-shrink-0 h-full w-[260px] sm:w-[300px] p-4 sm:p-5 bg-rose-600 rounded-2xl shadow-lg'>
-            <div className='flex justify-between items-center'>
-                <h3 className='bg-rose-800 text-white text-xs font-semibold px-3 py-1 rounded-lg'>{data.category}</h3>
-                <h4 className='text-xs text-rose-100'>{data.taskDate}</h4>
-            </div>
-            <h2 className='mt-5 text-xl font-semibold text-white'>{data.taskTitle}</h2>
-            <p className='text-sm mt-2 text-rose-100 leading-relaxed'>
-                {data.taskDescription}
-            </p>
-            <div className='mt-6'>
-                <button className='w-full bg-white text-rose-600 rounded-lg font-semibold py-2 px-2 text-xs cursor-default'>✗ Failed</button>
-            </div>
+const FailedTask = ({ data }) => (
+    <div className='flex-shrink-0 w-[270px] sm:w-[290px] bg-white border border-slate-200 rounded-2xl shadow-sm p-5 flex flex-col'>
+        <div className='flex justify-between items-center mb-3'>
+            <span className='bg-rose-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg'>{data.category}</span>
+            <span className='text-xs text-slate-400'>{data.taskDate}</span>
         </div>
-  )
-}
+        <span className='text-xs font-bold text-rose-500 uppercase tracking-wider mb-1'>Failed</span>
+        <h2 className='text-base font-bold text-slate-800 leading-snug'>{data.taskTitle}</h2>
+        <p className='text-sm text-slate-400 mt-2 leading-relaxed flex-1'>{data.taskDescription}</p>
+        <div className='mt-4 w-full bg-rose-50 border border-rose-200 text-rose-600 rounded-xl font-bold py-2.5 text-sm text-center flex items-center justify-center gap-2'>
+            <XCircle size={15} /> Failed
+        </div>
+    </div>
+)
 
 export default FailedTask

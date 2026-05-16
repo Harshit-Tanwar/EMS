@@ -1,60 +1,63 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
+import { Users } from 'lucide-react'
 
 const AllTask = () => {
-   const [userData,setUserData] =  useContext(AuthContext)
-  return (
-    <div className='bg-[#1a1a24] border border-white/5 p-4 sm:p-5 rounded-2xl mt-5 shadow-xl'>
-        <h2 className='text-lg font-semibold text-white mb-4'>All Employees</h2>
+    const [userData] = useContext(AuthContext)
 
-        {/* Desktop table */}
-        <div className='hidden sm:block'>
-            <div className='bg-indigo-700 mb-2 py-2.5 px-4 flex justify-between rounded-xl'>
-                <h2 className='text-sm font-semibold text-white w-1/5'>Employee Name</h2>
-                <h3 className='text-sm font-semibold text-white w-1/5'>New Task</h3>
-                <h5 className='text-sm font-semibold text-white w-1/5'>Active Task</h5>
-                <h5 className='text-sm font-semibold text-white w-1/5'>Completed</h5>
-                <h5 className='text-sm font-semibold text-white w-1/5'>Failed</h5>
+    return (
+        <div className='bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden'>
+            <div className='px-5 py-4 border-b border-slate-100 flex items-center gap-2'>
+                <Users size={18} className='text-indigo-500' />
+                <h2 className='text-base font-bold text-slate-800'>Employee Task Overview</h2>
             </div>
-            {userData.map(function(elem, idx){
-                return <div key={idx} className='border border-[#2a2a3a] hover:border-indigo-600 bg-[#1a1a2e] transition-colors mb-2 py-2.5 px-4 flex justify-between rounded-xl'>
-                    <h2 className='text-sm font-semibold text-white w-1/5'>{elem.firstName}</h2>
-                    <h3 className='text-sm font-medium w-1/5 text-sky-400'>{elem.taskCounts.newTask}</h3>
-                    <h5 className='text-sm font-medium w-1/5 text-amber-400'>{elem.taskCounts.active}</h5>
-                    <h5 className='text-sm font-medium w-1/5 text-emerald-400'>{elem.taskCounts.completed}</h5>
-                    <h5 className='text-sm font-medium w-1/5 text-rose-400'>{elem.taskCounts.failed}</h5>
-                </div>
-            })}
-        </div>
 
-        {/* Mobile cards */}
-        <div className='sm:hidden flex flex-col gap-3'>
-            {userData.map(function(elem, idx){
-                return <div key={idx} className='bg-[#1a1a2e] border border-[#2a2a3a] rounded-xl p-4'>
-                    <h2 className='text-base font-semibold text-white mb-3'>{elem.firstName}</h2>
-                    <div className='grid grid-cols-2 gap-2'>
-                        <div className='bg-[#0f0f13] rounded-lg px-3 py-2'>
-                            <p className='text-xs text-gray-400'>New</p>
-                            <p className='text-sm font-semibold text-sky-400'>{elem.taskCounts.newTask}</p>
-                        </div>
-                        <div className='bg-[#0f0f13] rounded-lg px-3 py-2'>
-                            <p className='text-xs text-gray-400'>Active</p>
-                            <p className='text-sm font-semibold text-amber-400'>{elem.taskCounts.active}</p>
-                        </div>
-                        <div className='bg-[#0f0f13] rounded-lg px-3 py-2'>
-                            <p className='text-xs text-gray-400'>Completed</p>
-                            <p className='text-sm font-semibold text-emerald-400'>{elem.taskCounts.completed}</p>
-                        </div>
-                        <div className='bg-[#0f0f13] rounded-lg px-3 py-2'>
-                            <p className='text-xs text-gray-400'>Failed</p>
-                            <p className='text-sm font-semibold text-rose-400'>{elem.taskCounts.failed}</p>
+            {/* Desktop */}
+            <div className='hidden sm:block'>
+                <div className='bg-slate-50 px-5 py-3 flex justify-between border-b border-slate-100'>
+                    {['Employee', 'New', 'Active', 'Completed', 'Failed'].map(h => (
+                        <span key={h} className='text-xs font-bold text-slate-400 uppercase tracking-wider w-1/5'>{h}</span>
+                    ))}
+                </div>
+                {userData?.map((elem, idx) => (
+                    <div key={idx} className='px-5 py-4 flex justify-between border-b border-slate-50 hover:bg-slate-50 transition-colors'>
+                        <span className='text-sm font-bold text-slate-700 w-1/5'>{elem.firstName}</span>
+                        <span className='text-sm font-semibold w-1/5 text-sky-600'>{elem.taskCounts.newTask}</span>
+                        <span className='text-sm font-semibold w-1/5 text-amber-500'>{elem.taskCounts.active}</span>
+                        <span className='text-sm font-semibold w-1/5 text-emerald-600'>{elem.taskCounts.completed}</span>
+                        <span className='text-sm font-semibold w-1/5 text-rose-500'>{elem.taskCounts.failed}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Mobile */}
+            <div className='sm:hidden divide-y divide-slate-100'>
+                {userData?.map((elem, idx) => (
+                    <div key={idx} className='p-4'>
+                        <p className='text-sm font-bold text-slate-700 mb-3'>{elem.firstName}</p>
+                        <div className='grid grid-cols-2 gap-2'>
+                            <div className='bg-sky-500 rounded-xl px-3 py-2.5'>
+                                <p className='text-xs text-sky-100'>New</p>
+                                <p className='text-lg font-bold text-white'>{elem.taskCounts.newTask}</p>
+                            </div>
+                            <div className='bg-amber-400 rounded-xl px-3 py-2.5'>
+                                <p className='text-xs text-amber-100'>Active</p>
+                                <p className='text-lg font-bold text-white'>{elem.taskCounts.active}</p>
+                            </div>
+                            <div className='bg-emerald-500 rounded-xl px-3 py-2.5'>
+                                <p className='text-xs text-emerald-100'>Completed</p>
+                                <p className='text-lg font-bold text-white'>{elem.taskCounts.completed}</p>
+                            </div>
+                            <div className='bg-rose-500 rounded-xl px-3 py-2.5'>
+                                <p className='text-xs text-rose-100'>Failed</p>
+                                <p className='text-lg font-bold text-white'>{elem.taskCounts.failed}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            })}
+                ))}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default AllTask
