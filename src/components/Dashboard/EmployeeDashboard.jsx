@@ -6,8 +6,7 @@ import TaskList from '../TaskList/TaskList'
 const EmployeeDashboard = (props) => {
 
   return (
-    <div className='p-10 bg-[#1C1C1C] h-screen'>
-        
+    <div className='p-4 sm:p-10 bg-[#0f0f13] min-h-screen'>
         <Header changeUser={props.changeUser} data={props.data}/>
         <TaskListNumbers data={props.data} />
         <TaskList data={props.data} />
